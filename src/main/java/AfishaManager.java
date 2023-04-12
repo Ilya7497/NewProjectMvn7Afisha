@@ -1,7 +1,7 @@
 public class AfishaManager {
     private AfishaManager manager;
-
     private CoverItem[] items = new CoverItem[0];
+    private int limit;
 
     public void saveCover(CoverItem item) {
         CoverItem[] tmp = new CoverItem[items.length + 1];
@@ -15,10 +15,32 @@ public class AfishaManager {
     public CoverItem[] findAll() {
         return items;
     }
+
     public CoverItem[] findLast() {
-        CoverItem[] reversed = new CoverItem[findAll().length];
-        for (int i = 0;i < reversed.length; i++) {
-            reversed[i] = items[findAll().length - 1 - i];
+        int resultLength;
+        if (items.length > 5) {
+            resultLength = 5;
+        } else {
+            resultLength = items.length;
+        }
+        CoverItem[] reversed = new CoverItem[resultLength];
+        for (int i = 0; i < reversed.length; i++) {
+            reversed[i] = items[items.length - 1 - i];
+        }
+        return reversed;
+    }
+
+    public CoverItem[] findLastIfLimit(int limit) {
+        this.limit = limit;
+        int resultLength;
+        if (items.length < limit) {
+            resultLength = items.length;
+        } else {
+            resultLength = limit;
+        }
+        CoverItem[] reversed = new CoverItem[resultLength];
+        for (int i = 0; i < reversed.length; i++) {
+            reversed[i] = items[items.length - 1 - i];
         }
         return reversed;
     }

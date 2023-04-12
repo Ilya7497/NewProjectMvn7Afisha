@@ -13,6 +13,7 @@ public class AfishaManagerTest {
     CoverItem item5 = new CoverItem("Человек-невидимка");
     CoverItem item6 = new CoverItem("Тролли.Мировой тур");
     CoverItem item7 = new CoverItem("Номер один");
+
     @BeforeEach
     public void setup() {
         manager.saveCover(item1);
@@ -33,19 +34,31 @@ public class AfishaManagerTest {
         Assertions.assertArrayEquals(expected, actual);
 
     }
+
     @Test
-    public void findAllCOver() {
+    public void findAllCover() {
 
         CoverItem[] expected = {item1, item2, item3, item4, item5, item6, item7};
         CoverItem[] actual = manager.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void findLast() {
 
-        CoverItem[] expected = {item7, item6, item5, item4, item3, item2, item1};
+        CoverItem[] expected = {item7, item6, item5, item4, item3};
         CoverItem[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastLimit() {
+
+
+        CoverItem[] expected = {item7, item6, item5};
+        CoverItem[] actual = manager.findLastIfLimit(3);
 
         Assertions.assertArrayEquals(expected, actual);
     }
