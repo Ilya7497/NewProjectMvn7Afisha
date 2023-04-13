@@ -89,5 +89,37 @@ public class AfishaManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void findLastIfLessLimit() {
+        AfishaManager manager = new AfishaManager(4);
+
+        manager.saveCover(item1);
+        manager.saveCover(item2);
+        manager.saveCover(item3);
+
+        CoverItem[] expected = {item3, item2, item1};
+        CoverItem[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void findLastIfEquallyLimit() {
+        AfishaManager manager = new AfishaManager(4);
+
+        manager.saveCover(item1);
+        manager.saveCover(item2);
+        manager.saveCover(item3);
+        manager.saveCover(item4);
+
+        CoverItem[] expected = {item4, item3, item2, item1};
+        CoverItem[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
 
 }
